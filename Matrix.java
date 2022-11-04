@@ -61,6 +61,14 @@ public class Matrix {
                 this.a[i][j] = a[i][j];
     }
 
+    public int getRows() {
+        return rows;
+    }
+
+    public int getCols() {
+        return cols;
+    }
+
     public static Matrix add(Matrix matrix1, Matrix matrix2) {
         if (matrix1.rows != matrix2.rows || matrix1.cols != matrix2.cols)
             throw new MatrixException("Incorrect matrix dimensions!");
@@ -88,7 +96,7 @@ public class Matrix {
             throw new MatrixException("Multiplication not possible!");
 
         Matrix result = new Matrix(matrix1.rows, matrix2.cols);
-        for (int i = 0; i < matrix1.rows; i++) {
+        for (int i = 0; i < matrix2.cols; i++) {
             for (int j = 0; j < matrix1.rows; j++) {
 
                 for (int k = 0; k < matrix1.cols; k++)
