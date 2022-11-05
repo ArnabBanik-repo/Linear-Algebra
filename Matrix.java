@@ -313,4 +313,43 @@ public class Matrix {
         return reduced;
     }
 
+    public static Matrix subMatrix(Matrix matrix, int avoidRow, int avoidCol) {
+        Matrix subMatrix = new Matrix(matrix.rows - 1, matrix.cols - 1);
+        int r = 0;
+        for (int i = 0; i < matrix.rows; i++) {
+            if (i == avoidRow) {
+                r = 1;
+                continue;
+            }
+            int c = 0;
+            for (int j = 0; j < matrix.cols; j++) {
+                if (j == avoidCol) {
+                    c = 1;
+                    continue;
+                }
+                subMatrix.a[i - r][j - c] = matrix.a[i][j];
+            }
+        }
+        return subMatrix;
+    }
+
+    public float determinant() {
+        if (rows != cols)
+            throw new MatrixException("Determinant doesn't exist");
+
+        return temp(this);
+    }
+
+    private float temp(Matrix test) {
+        if (test.rows == 2)
+            return test.a[0][0] * test.a[1][1] - test.a[1][0] * test.a[0][1];
+        int x = 1;
+        float det = 0.0f;
+        for (int i = 0; i < test.cols; i++) {
+            det += x * test.a[0][i] * temp(subMatrix(test, 0, i));
+            x *= -1;
+        }
+
+        return det;
+    }
 }
