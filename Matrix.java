@@ -61,12 +61,25 @@ public class Matrix {
                 this.a[i][j] = a[i][j];
     }
 
+    Matrix(Matrix A) {
+        rows = A.rows;
+        cols = A.cols;
+        this.a = new float[rows][cols];
+        for (int i = 0; i < rows; i++)
+            for (int j = 0; j < cols; j++)
+                this.a[i][j] = A.a[i][j];
+    }
+
     public int getRows() {
         return rows;
     }
 
     public int getCols() {
         return cols;
+    }
+
+    public float[][] getArray() {
+        return a;
     }
 
     public static Matrix add(Matrix matrix1, Matrix matrix2) {
@@ -311,6 +324,25 @@ public class Matrix {
             }
         }
         return reduced;
+    }
+
+    public static Matrix subMatrix(Matrix matrix, int startRow, int endRow, int startCol, int endCol, int avoidCol) {
+        Matrix subMatrix = avoidCol == -1 ? new Matrix(endRow - startRow + 1, endCol - startCol + 1)
+                : new Matrix(endRow - startRow + 1, endCol - startCol);
+        for (int i = startRow; i <= endRow; i++) {
+            int k = 0;
+            for (int j = startCol; j <= endCol; j++) {
+                if (j == avoidCol) {
+                    k = 1;
+                    continue;
+                }
+                if (avoidCol == -1)
+                    subMatrix.a[i - startRow][j - startCol] = matrix.a[i][j];
+                else
+                    subMatrix.a[i - startRow][j - startCol - k] = matrix.a[i][j];
+            }
+        }
+        return subMatrix;
     }
 
     public static Matrix subMatrix(Matrix matrix, int avoidRow, int avoidCol) {
