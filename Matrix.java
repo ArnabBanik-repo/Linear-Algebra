@@ -216,6 +216,24 @@ public class Matrix {
         return reduced;
     }
 
+    public static boolean isRef(Matrix A) {
+        for (int i = 0; i < A.rows - 1; i++) {
+            int pivot = -1;
+            for (int j = 0; j < A.cols; j++) {
+                if (A.a[i][j] != 0) {
+                    pivot = j;
+                    break;
+                }
+            }
+            if (pivot == -1)
+                continue;
+            for (int j = i + 1; j < A.rows; j++)
+                if (A.a[j][pivot] != 0)
+                    return false;
+        }
+        return true;
+    }
+
     public int rank() {
         int rank = 0;
         Matrix temp = this.inverse();

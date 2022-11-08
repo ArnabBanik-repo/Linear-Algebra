@@ -33,18 +33,19 @@ public class MatrixDecomposition {
                 for (int k = i; k < temp; k++) {
                     if (k < U.getCols()) {
                         U.getArray()[j][k] -= U.getArray()[i][k] * p / U.getArray()[i][pivot];
-                        if (U.getArray()[j][k] == 0)
+                        if (k == i)
                             L.getArray()[j][k] = p / U.getArray()[i][pivot];
                     }
                 }
             }
+
         }
 
         return new Matrix[] { L, U };
     }
 
     public static void main(String[] args) {
-        Matrix A = new Matrix(5, 3, new float[] { 2, -3, 4, -4, 8, -7, 6, -5, 14, -6, 9, -12, 8, -6, 19 });
+        Matrix A = new Matrix(3, 3, new float[] { 2, 2, 3, 5, 9, 10, 4, 1, 2 });
         A.display();
         MatrixDecomposition md = new MatrixDecomposition(A);
 
