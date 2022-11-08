@@ -163,10 +163,7 @@ public class Matrix {
     public void display() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                if (a[i][j] < 0)
-                    System.out.printf(" %.2f", a[i][j]);
-                else
-                    System.out.printf("  %.2f", a[i][j]);
+                System.out.printf("%8.2f", a[i][j]);
             }
             System.out.println();
         }
