@@ -258,20 +258,22 @@ public class Matrix {
                 }
             if (pivot == -1)
                 throw new MatrixException("Inverse doesn't exist!");
-
+            float a = copy.a[i][pivot];
             for (int j = 0; j < cols; j++) {
                 inv.a[i][j] /= copy.a[i][pivot];
-                copy.a[i][j] /= copy.a[i][pivot];
+                copy.a[i][j] /= a;
             }
-
+            copy.display();
             for (int j = 0; j < rows; j++) {
                 if (j == i)
                     continue;
+                float x = copy.a[j][pivot];
                 for (int k = 0; k < cols; k++) {
-                    inv.a[j][k] -= inv.a[i][k] * copy.a[j][pivot];
-                    copy.a[j][k] -= copy.a[i][k] * copy.a[j][pivot];
+                    inv.a[j][k] -= inv.a[i][k] * x;
+                    copy.a[j][k] -= copy.a[i][k] * x;
                 }
             }
+
         }
         return inv;
     }
