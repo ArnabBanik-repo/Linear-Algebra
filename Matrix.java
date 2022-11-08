@@ -263,7 +263,6 @@ public class Matrix {
                 inv.a[i][j] /= copy.a[i][pivot];
                 copy.a[i][j] /= a;
             }
-            copy.display();
             for (int j = 0; j < rows; j++) {
                 if (j == i)
                     continue;
