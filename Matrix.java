@@ -202,14 +202,16 @@ public class Matrix {
                 i--;
                 continue;
             }
+            float p = reduced.a[i][pivot];
             for (int j = 0; j < cols; j++) {
-                reduced.a[i][j] /= reduced.a[i][pivot];
+                reduced.a[i][j] /= p;
             }
             for (int j = 0; j < rows; j++) {
                 if (j == i)
                     continue;
+                float f = reduced.a[j][pivot];
                 for (int k = 0; k < cols; k++) {
-                    reduced.a[j][k] -= reduced.a[i][k] * reduced.a[j][pivot];
+                    reduced.a[j][k] -= reduced.a[i][k] * f;
                 }
             }
         }

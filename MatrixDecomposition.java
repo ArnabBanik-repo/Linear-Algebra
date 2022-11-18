@@ -45,7 +45,7 @@ public class MatrixDecomposition {
     }
 
     public static void main(String[] args) {
-        Matrix A = new Matrix(3, 3, new float[] { 2, 2, 3, 5, 9, 10, 4, 1, 2 });
+        Matrix A = new Matrix(3, 3, new float[] { 1, 2, 3, 4, 5, 6, 1, 4, 9 });
         A.display();
         MatrixDecomposition md = new MatrixDecomposition(A);
 
